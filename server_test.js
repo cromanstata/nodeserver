@@ -9,6 +9,8 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.listen(port);
 
+
+
 var user_num = 1;
 var team_num = 1;
 
@@ -17,6 +19,8 @@ var arr_users = {
 
 var arr_teams = {
 }
+
+
 
 function userMake(name, id, team_id)
 {
@@ -74,7 +78,7 @@ function removeFromTeam(user)
   }
 }
 
-function createNewUser(user, team_id)
+exports.createNewUser = function createNewUser(user, team_id)
 {
   user = new userMake(user, user_num, team_id);
   arr_users['user'+user.id] = user;
@@ -85,7 +89,7 @@ function createNewUser(user, team_id)
   ++user_num;
 }
 
-function updateUser(user_name, id)
+exports.updateUser = function updateUser(user_name, id)
 {
   var getid = "user" + id;
   arr_users[getid].name = user_name;
@@ -98,7 +102,7 @@ function deleteUser(user)
     delete arr_users[getid];
 }
 
-function createNewTeam(name)
+exports.createNewTeam = function createNewTeam(name)
 {
   var id = name;
   team = new teamMake(name, team_num);
@@ -108,19 +112,20 @@ function createNewTeam(name)
 }
 
 function containsObject(obj, list) {
-    for(var key in list)
-    {
-      if (list[key].name === obj) {
-          return true;
-      }
+  for(var key in list)
+  {
+    if (list[key].name === obj) {
+        return true;
     }
-    return false;
+  }
+  return false;
 }
 
 function deleteTeam(team)
 {
   delete arr_teams[team.name];
 }
+
 
 app.post('/teams/create', function(req, res) {
 
@@ -191,11 +196,3 @@ app.get('/users/:name', function(req, res) {
 
 
 //something to put inside
-createNewUser("hello1", "winners");
-createNewUser("world2", "loosers");
-createNewTeam("winners");
-createNewTeam("loosers");
-
-
-
-updateUser("hello hello" , 1);

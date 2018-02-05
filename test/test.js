@@ -1,8 +1,12 @@
-var assert = require('assert');
-describe('Array', function() {
-  describe('#indexOf()', function() {
-    it('should return -1 when the value is not present', function() {
-      assert.equal([1,2,3].indexOf(4), -1);
-    });
-  });
+var tools = require('../server_test');
+
+describe('tets', function() {
+  tools.createNewUser("hello1", "winners");
+  tools.createNewUser("world2", "loosers");
+  tools.createNewTeam("winners");
+  tools.createNewTeam("loosers");
+
+
+
+  tools.updateUser("hello hello" , 1);
 });
